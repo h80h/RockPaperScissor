@@ -1,4 +1,8 @@
 let randomNum;
+let userChoice;
+
+getComputerChoice();
+getHumanChoice();
 
 function getComputerChoice(){
   // use Math.floor(Math.random()) to ramdomly pick up number 1 - 3
@@ -14,4 +18,11 @@ function getComputerChoice(){
     case 3:
       return "scissors";
   }
+}
+
+function getHumanChoice(){
+  // use prompt() to let and get user's input
+  // give user hint message in pop up dialogue
+  // need to declare a variable to store the input!
+  userChoice = prompt("rock / paper / scissors ?")
 }
