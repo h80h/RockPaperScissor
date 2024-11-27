@@ -5,6 +5,9 @@ let draw = 0;
 let humanSelection;
 let computerSelection;
 
+alert(
+`Open the console on the brower first to play this game
+Note: Press Ctrl+Shift+J on Win or Cmd+Opt+J on Mac`);
 playGame();
 
 function getComputerChoice(){
