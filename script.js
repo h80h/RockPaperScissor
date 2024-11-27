@@ -43,6 +43,15 @@ function playGame(){
     playRound(humanSelection, computerSelection);
   }
 
+  // Announce the winner
+  if (humanScore > computerScore){
+    console.log("The final winner is...YOU! Congrats! 🎉")
+  } else if(humanScore < computerScore){
+    console.log("What?? It's the computer beats you at the end...👾")
+  } else {
+    console.log("You & the computer are neck-and-neck this time 😼")
+  }
+
   function playRound(humanChoice, computerChoice){
     // IF humanChoice is the winner, increase humanScore by 1
     // ELSE IF computerChoice is the winner, increase computerScore by 1
