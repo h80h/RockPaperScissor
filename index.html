@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    #results {
+      white-space: pre-line;
+      padding-top: 10px;
+      padding-left: 1px;
+    }
+
+    button {
+      font-size: large;
+    }
+  </style>
 </head>
 <body>
-  
+  <div id="btns">
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissors">scissors</button>
+  </div>
+  <div id="results"></div>
 </body>
 </html>

@@ -2,13 +2,8 @@ let randomNum;
 let humanScore = 0;
 let computerScore = 0;
 let draw = 0;
-let humanSelection;
-let computerSelection;
-
-alert(
-`Open the console on the brower first to play this game
-Note: Press Ctrl+Shift+J on Win or Cmd+Opt+J on Mac`);
-playGame();
+let humanChoice;
+let computerChoice;
 
 function getComputerChoice(){
   // use Math.floor(Math.random()) to ramdomly pick up number 1 - 3
@@ -23,69 +18,61 @@ function getComputerChoice(){
   }
 }
 
-function getHumanChoice(){
-  // use prompt() to let and get user's input
-  // give user hint message in pop up dialogue
-  // need to declare a variable to store the input!
-  return prompt("rock / paper / scissors ?").toLowerCase();
-}
+let btns = document.querySelector("#btns")
+let results = document.querySelector("#results")
 
-function playGame(){
-  // Use for loop to make this game run 5 rounds
-  // What needs to repeat are: getHumanChoice(), getComputerChoice(), playRound()
-  
-  alert("Let's do a total of 5 rounds 'Rock, Paper, Scissors' with the computer! 👻 ")
-  
-  for(let i = 0 ; i < 5 ; i++){
-    alert(`Round ${i+1}`);
-    humanSelection = getHumanChoice();
-    computerSelection = getComputerChoice();
+btns.addEventListener("click", function(e){
+  humanChoice = e.target.id;
+  computerChoice = getComputerChoice();
+  playRound(humanChoice, computerChoice);
+})
 
-    console.log(`Round ${i+1}:`)
-    playRound(humanSelection, computerSelection);
+// Announce the winner
+// if (humanScore > computerScore ){
+//   console.log("The final winner is...YOU! Congrats! 🎉")
+// } else if(humanScore < computerScore){
+//   console.log("What?? It's the computer beats you at the end...👾")
+// } else {
+//   console.log("You & the computer are neck-and-neck this time 😼")
+// }
+
+function playRound(humanSelection, computerSelection){
+  // IF humanChoice is the winner, increase humanScore by 1
+  // ELSE IF computerChoice is the winner, increase computerScore by 1
+  // Here's the table to show whether human or computer win (a is human):
+  //
+  // +==========+========+========+==========+
+  // |   b\a    |  rock  | paper  | scissors |
+  // +==========+========+========+==========+
+  // | rock     | draw   | a(win) | b(win)   |
+  // +----------+--------+--------+----------+
+  // | paper    | b(win) | draw   | a(win)   |
+  // +----------+--------+--------+----------+
+  // | scissors | a(win) | b(win) | draw     |
+  // +----------+--------+--------+----------+
+
+  results.textContent += (`You choose ${humanSelection}; Computer choose ${computerSelection}\n`)
+
+  if((humanSelection == "rock" && computerSelection == "scissors") ||
+    (humanSelection == "paper" && computerSelection == "rock") ||
+    (humanSelection == "scissors" && computerSelection == "paper")){
+    humanScore ++;
+    results.textContent += (`You win, ${humanSelection} beats ${computerSelection}\n`);
+  }else if(humanSelection == computerSelection){
+    draw ++;
+    results.textContent += (`It's a draw, ${humanSelection} & ${computerSelection} can't beat each other\n`);
+  }else {
+    computerScore ++;
+    results.textContent += (`You lose...${humanSelection} is beaten by ${computerSelection}\n`);
   }
 
-  // Announce the winner
-  if (humanScore > computerScore ){
-    console.log("The final winner is...YOU! Congrats! 🎉")
-  } else if(humanScore < computerScore){
-    console.log("What?? It's the computer beats you at the end...👾")
-  } else {
-    console.log("You & the computer are neck-and-neck this time 😼")
-  }
+  results.textContent += ("Scoreboard:\n");
+  results.textContent += (`You:${humanScore} Computer:${computerScore} Draw:${draw}\n`);
+  results.textContent += ("========+========+========\n\n");
 
-  function playRound(humanChoice, computerChoice){
-    // IF humanChoice is the winner, increase humanScore by 1
-    // ELSE IF computerChoice is the winner, increase computerScore by 1
-    // Here's the table to show whether human or computer win (a is human):
-    //
-    // +==========+========+========+==========+
-    // |   b\a    |  rock  | paper  | scissors |
-    // +==========+========+========+==========+
-    // | rock     | draw   | a(win) | b(win)   |
-    // +----------+--------+--------+----------+
-    // | paper    | b(win) | draw   | a(win)   |
-    // +----------+--------+--------+----------+
-    // | scissors | a(win) | b(win) | draw     |
-    // +----------+--------+--------+----------+
-
-    console.log(`You choose ${humanSelection}; Computer choose ${computerSelection}`)
-
-    if((humanChoice == "rock" && computerChoice == "scissors") ||
-      (humanChoice == "paper" && computerChoice == "rock") ||
-      (humanChoice == "scissors" && computerChoice == "paper")){
-      humanScore ++;
-      console.log(`You win, ${humanSelection} beats ${computerSelection}`);
-    }else if(humanChoice == computerChoice){
-      draw ++;
-      console.log(`It's a draw, ${humanSelection} & ${computerSelection} can't beat each other`);
-    }else {
-      computerScore ++;
-      console.log(`You lose...${humanSelection} is beaten by ${computerSelection}`);
-    }
-
-    console.log("Scoreboard:");
-    console.log(`You:${humanScore} Computer:${computerScore} Draw:${draw}`);
-    console.log("========+========+========");
+  if(humanScore >= 5){
+    results.textContent += ("You got the 5 points faster, you're the final winner!")
+  } else if(computerScore >= 5){
+    results.textContent += ("computer got 5 points faster than you, computer is the final winner 👾")
   }
 }
